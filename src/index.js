@@ -10,10 +10,13 @@ const spriteH = 48;
 const shots = 3;
 let cycle = 0;
 let bottomPressed = false;
-let pY = canvasH / 2;
-let pX = canvasW / 2;
+let pY = canvasH/2;
+let pX = canvasW/2;
 let direction;
 let dirShots = 0;
+// context.strokeStyle = 'green';
+// context.lineWidth = 9;
+// context.strokeRect(20, 20, 200, 100);
 
 function keyUpHandler(e) {
   console.log(e.key);
@@ -64,32 +67,27 @@ img.src = mailHero;
 img.addEventListener('load', () => {
   setInterval(() => {
     if (bottomPressed && direction === 'Down') {
-      console.log('#### canvasH:', canvasH);
-      console.log('#### pY:', pY);
-      console.log('#### spriteH', spriteH);
-      pY = Math.max(pY, Math.min(canvasH - spriteH, pY + 10));
+      pY += 10;
       cycle = (cycle + 1) % shots;
-      dirShots = spriteH * 0;
-      console.log(pY);
+      dirShots = spriteH*0;
+      console.log(dirShots);
     }
     if (bottomPressed && direction === 'Up') {
-      console.log(canvasH - pY);
-      pY = Math.max(spriteH - spriteH, Math.min(canvasH - spriteH, pY - 10));
-      console.log('#### UP:', pY);
+      pY -= 10;
       cycle = (cycle + 1) % shots;
-      dirShots = spriteH * 3;
+      dirShots = spriteH*3;
+      console.log(dirShots);
     }
     if (bottomPressed && direction === 'Left') {
-      pX = Math.max(spriteW - spriteW, Math.min(canvasW - spriteW, pX - 10));
-      console.log("#### left:", pX);
+      pX -= 10;
       cycle = (cycle + 1) % shots;
-      dirShots = spriteH * 1;
+      dirShots = spriteH*1;
       console.log(dirShots);
     }
     if (bottomPressed && direction === 'Right') {
-      pX = Math.max(pX, Math.min(canvasW - spriteW, pX + 10));
+      pX += 10;
       cycle = (cycle + 1) % shots;
-      dirShots = spriteH * 2;
+      dirShots = spriteH*2;
       console.log(dirShots);
     }
     context.clearRect(0, 0, 600, 600);
