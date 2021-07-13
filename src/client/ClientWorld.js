@@ -10,6 +10,9 @@ class ClientWorld {
     }
 
     init() {
+        const canvas = document.getElementById('game');
+        const canvasW = canvas.width;
+        const canvasH = canvas.height;
         const pr = 0;
         for (let cW = 0; cW < canvasW; cW += 48) {
             console.log('#### cW', cW);
