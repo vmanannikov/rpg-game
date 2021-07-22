@@ -1,10 +1,10 @@
 import EventSourceMixin from '../common/EventSourceMixin';
-import ClientCamera from "./ClientCamera";
-import ClientInput from "./ClientInput";
+import ClientCamera from './ClientCamera';
+import ClientInput from './ClientInput';
 
 class ClientEngine {
-    constructor(canvas) {
-        //console.log(canvas);
+    constructor(canvas, game ) {
+    // console.log(canvas);
 
         Object.assign(this, {
             canvas,
@@ -12,8 +12,9 @@ class ClientEngine {
             imageLoaders: [],
             sprites: {},
             images: {},
-            camera: new ClientCamera( {canvas, engine: this}),
+            camera: new ClientCamera({ canvas, engine: this }),
             input: new ClientInput(canvas),
+            game,
         });
 
         this.context = canvas.getContext('2d');
@@ -86,9 +87,9 @@ class ClientEngine {
         const spriteCfg = this.sprites[sprite[0]][sprite[1]];
         const [fx, fy, fw, fh] = spriteCfg.frames[frame];
         const img = this.images[spriteCfg.img];
-        console.log('#### img', img);
+        const camera = this.camera;
 
-        this.context.drawImage(img, fx, fy, fw, fh, x, y, w, h);
+        this.context.drawImage(img, fx, fy, fw, fh, x - camera.x, y - camera.y, w, h);
     }
 }
 

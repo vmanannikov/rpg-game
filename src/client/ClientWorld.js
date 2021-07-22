@@ -1,7 +1,7 @@
-import PositionedObject from "../common/PositionedObject";
-import ClientCell from "./ClientCell";
+import PositionedObject from '../common/PositionedObject';
+import ClientCell from './ClientCell';
 
-class ClientWorld extends PositionedObject{
+class ClientWorld extends PositionedObject {
     constructor(game, engine, levelCfg) {
         super();
 
@@ -27,12 +27,14 @@ class ClientWorld extends PositionedObject{
     }
 
     init() {
-        const { levelCfg, map, worldWidth, worldHeight } = this;
+        const {
+            levelCfg, map, worldWidth, worldHeight,
+        } = this;
         console.log('#### Client World this init', this);
 
-        for (let row = 0; row < worldHeight; row++){
-            for (let col = 0; col < worldWidth; col++){
-                if(!map[row]){
+        for (let row = 0; row < worldHeight; row++) {
+            for (let col = 0; col < worldWidth; col++) {
+                if (!map[row]) {
                     map[row] = [];
                 }
 
@@ -47,14 +49,13 @@ class ClientWorld extends PositionedObject{
                 console.log('#### cellCfg', map[row][col]);
             }
         }
-
     }
 
-    render(time){
-        const { map, worldWidth, worldHeight} = this;
+    render(time) {
+        const { map, worldWidth, worldHeight } = this;
 
-        for(let row = 0; row < worldHeight; row++){
-            for(let col = 0; col < worldWidth; col++){
+        for (let row = 0; row < worldHeight; row++) {
+            for (let col = 0; col < worldWidth; col++) {
                 console.log('#### map row', row);
                 console.log('#### map col', col);
                 map[row][col].render(time);
@@ -62,7 +63,7 @@ class ClientWorld extends PositionedObject{
         }
     }
 
-    cellAt(col, row){
+    cellAt(col, row) {
         return this.map[row] && this.map[row][col];
     }
 }
