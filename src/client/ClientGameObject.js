@@ -4,13 +4,15 @@ class ClientGameObject extends MovableObject {
     constructor(cfg) {
         super();
 
-        const { x, y, width, height } = cfg.cell;
+        const {
+            x, y, width, height,
+        } = cfg.cell;
 
-        const world = cfg.cell.world;
+        const { world } = cfg.cell;
         const gameObjs = world.game.gameObjects;
-        const objCfg =  typeof cfg.objCfg === 'string' ? { type: cfg.objCfg } : cfg.objCfg;
+        const objCfg = typeof cfg.objCfg === 'string' ? { type: cfg.objCfg } : cfg.objCfg;
 
-        if(objCfg.player) {
+        if (objCfg.player) {
             world.game.setPlayer(this);
         }
 
@@ -49,22 +51,38 @@ class ClientGameObject extends MovableObject {
             this.cell = newCell;
             newCell.addGameObject(this);
 
-            const { x, y, width, height } = newCell;
-            Object.assign(this, { x, y, width, height });
+            const {
+                x, y, width, height,
+            } = newCell;
+            Object.assign(this, {
+                x,
+                y,
+                width,
+                height,
+            });
         }
     }
 
     render(time) {
         super.render(time);
 
-        const { x, y, width, height, world } = this;
-        const engine = world.engine;
+        const {
+            x, y, width, height, world,
+        } = this;
+        const { engine } = world;
 
         const { sprite, frame, states } = this.spriteCfg;
 
         const spriteFrame = states ? states.main.frames[0] : frame;
 
-        engine.renderSpriteFrame({ sprite, frame: spriteFrame, x, y, w: width, h: height });
+        engine.renderSpriteFrame({
+            sprite,
+            frame: spriteFrame,
+            x,
+            y,
+            w: width,
+            h: height,
+        });
     }
 
     detouch() {
