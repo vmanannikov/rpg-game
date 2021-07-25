@@ -29,7 +29,7 @@ class ClientGame {
         return new ClientEngine(document.getElementById(this.cfg.tagId), this);
     }
 
-    getWorld(){
+    getWorld() {
         return this.map;
     }
 
@@ -64,13 +64,10 @@ class ClientGame {
 
         const { player } = this;
 
-        if(player){
-            player.moveByCellCoord(dirs[dir][0], dirs[dir][1], (cell) => {
-                return cell.findObjectsByType('grass').length;
-            });
+        if (player) {
+            player.moveByCellCoord(dirs[dir][0], dirs[dir][1], (cell) => cell.findObjectsByType('grass').length);
         }
     }
-
 
     static init(cfg) {
         if (!ClientGame.game) {
