@@ -30,7 +30,6 @@ class ClientWorld extends PositionedObject {
         const {
             levelCfg, map, worldWidth, worldHeight,
         } = this;
-        console.log('#### Client World this init', this);
 
         for (let row = 0; row < worldHeight; row++) {
             for (let col = 0; col < worldWidth; col++) {
@@ -38,7 +37,6 @@ class ClientWorld extends PositionedObject {
                     map[row] = [];
                 }
 
-                console.log('#### map init', map);
 
                 map[row][col] = new ClientCell({
                     world: this,
@@ -46,19 +44,18 @@ class ClientWorld extends PositionedObject {
                     cellRow: row,
                     cellCfg: levelCfg.map[row][col],
                 });
-                console.log('#### cellCfg', map[row][col]);
             }
         }
     }
 
     render(time) {
-        const { map, worldWidth, worldHeight } = this;
+        const { levelCfg, map, worldWidth, worldHeight } = this;
 
-        for (let row = 0; row < worldHeight; row++) {
-            for (let col = 0; col < worldWidth; col++) {
-                console.log('#### map row', row);
-                console.log('#### map col', col);
-                map[row][col].render(time);
+        for(let layerId = 0; layerId < levelCfg.layers.length; layerId++){
+            for (let row = 0; row < worldHeight; row++) {
+                for (let col = 0; col < worldWidth; col++) {
+                    map[row][col].render(time, layerId);
+                }
             }
         }
     }
