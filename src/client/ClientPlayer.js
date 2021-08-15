@@ -1,17 +1,17 @@
-import ClientGameObject from "./ClientGameObject";
+import ClientGameObject from './ClientGameObject';
 
-class ClientPlayer extends ClientGameObject{
+class ClientPlayer extends ClientGameObject {
     constructor(cfg) {
         super(cfg);
 
         this.playerName = 'Vadim';
 
-        const world = cfg.cell.world;
+        const { world } = cfg.cell;
 
         world.game.setPlayer(this);
     }
 
-    render(time){
+    render(time) {
         super.render(time);
 
         const { world } = this;
