@@ -64,10 +64,20 @@ class ClientGame {
 
         const { player } = this;
 
-        if(player){
-            player.moveByCellCoord(dirs[dir][0], dirs[dir][1], (cell) => {
+        console.log('#### DIR', dir);
+        console.log('#### DIRS[]', dirs);
+
+        if(player && player.motionProgress === 1){
+            const canMove = player.moveByCellCoord(dirs[dir][0], dirs[dir][1], (cell) => {
                 return cell.findObjectsByType('grass').length;
             });
+
+            console.log('#### canMove', canMove);
+
+            if(canMove){
+                player.setState(dir);
+                player.once('motion-stopped', () => player.setState('main'));
+            }
         }
     }
 
@@ -75,8 +85,6 @@ class ClientGame {
     static init(cfg) {
         if (!ClientGame.game) {
             ClientGame.game = new ClientGame(cfg);
-            console.log('###: GAME INIT');
-            console.log('####: ClientGame cfg', cfg);
         }
     }
 }
